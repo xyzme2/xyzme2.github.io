@@ -24,20 +24,48 @@
     var height = svg.attr("height");
     
     var nodes = [
-        {"value": "AB&JS", "image": "AB&JS.jpg"},
-        {"value": "DP", "image": "DP.jpg"},
-        {"value": "EV", "image": "EV.jpg"},
-        {"value": "HoOL", "image": "HoOL.jpg"},
-        {"value": "MA", "image": "MA.jpg"},
-        {"value": "MH", "image": "MH.jpg"},
-        {"value": "MMa", "image": "MMa.jpg"},
-        {"value": "MMe", "image": "MMe.jpg"},
-        {"value": "MPe", "image": "MPe.jpg"},
-        {"value": "MPu", "image": "MPu.jpg"},
-        {"value": "NtPB", "image": "NtPB.jpg"},
-        {"value": "PFG", "image": "PFG.jpg"},
-        {"value": "PFD", "image": "PFD.jpg"},
-        {"value": "StAaA", "image": "StAaA.jpg"},
+        {"value": "AB&JS", "image": "AB&JS.jpg", "targets": [
+            "MMa", "MMe", "MA", "DP", "MPu", "MPe", "HoOL", "NtPB", "StAaA"
+        ]},
+        {"value": "DP", "image": "DP.jpg", "targets": [
+            "AB&JS", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "StAaA"
+        ]},
+        {"value": "EV", "image": "EV.jpg", "targets": [
+            "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "HoOL", "image": "HoOL.jpg", "targets": [
+            "AB&JS", "DP", "EV", "MA", "MH", "MMa", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "MA", "image": "MA.jpg", "targets": [
+            "AB&JS", "DP", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "MH", "image": "MH.jpg", "targets": [
+            "DP", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "PFG", "PFD"
+        ]},
+        {"value": "MMa", "image": "MMa.jpg", "targets": [
+            "AB&JS", "DP", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "MMe", "image": "MMe.jpg", "targets": [
+            "AB&JS", "DP", "EV", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "PFG", "PFD"
+        ]},
+        {"value": "MPe", "image": "MPe.jpg", "targets": [
+            "AB&JS", "DP", "EV", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "MPu", "image": "MPu.jpg", "targets": [
+            "AB&JS", "DP", "EV", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "NtPB", "image": "NtPB.jpg", "targets": [
+            "AB&JS", "DP", "EV", "HoOL", "MA", "MMa", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "PFG", "image": "PFG.jpg", "targets": [
+            "DP", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "PFD", "image": "PFD.jpg", "targets": [
+            "DP", "EV", "HoOL", "MA", "MH", "MMa", "MMe", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
+        {"value": "StAaA", "image": "StAaA.jpg", "targets": [
+            "AB&JS", "DP", "EV", "HoOL", "MA", "MMa", "MPe", "MPu", "NtPB", "PFG", "PFD", "StAaA"
+        ]},
     ];
 
     var links = [
@@ -100,7 +128,15 @@
     nodesel.append("circle")
         .attr("r", 20)
         .on("mouseover", function(d) {
-            d3.select(this).style("fill", "orange");
+            var targets = d.targets;
+            for (let i = 0; i < targets.length; i++) {
+                d3.select("body").append("p").text(d.targets[i]); 
+                d3.selectAll(".node").filter(function(d) {
+                    return d.value == targets[i];
+                }).select("circle").style("fill", "orange");
+            }
+            d3.select(this).style("fill", "Chocolate");
+
             cardImage.style("opacity", 1)
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY) + "px")
@@ -108,6 +144,13 @@
         })
         .on("mouseout", function(d) {
             d3.select(this).style("fill", "lightblue");
+            var targets = d.targets;
+            for (let i = 0; i < targets.length; i++) {
+                d3.select("body").append("p").text(d.targets[i]); 
+                d3.selectAll(".node").filter(function(d) {
+                    return d.value == targets[i];
+                }).select("circle").style("fill", "lightblue");
+            }
             cardImage.style("opacity", 0);
         });
     
