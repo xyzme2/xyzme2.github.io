@@ -5,7 +5,13 @@
     .link line {stroke: black}
     .node circle {fill: lightblue; stroke: black}
     .node text {font: 10px sans-serif; text-anchor: middle}
+    #cardImage {
+        position: absolute;
+        opacity: 0;
+    }
 </style>
+
+<div id="cardImage"></div>
 
 <h1>graph wip</h1>
 
@@ -19,19 +25,19 @@
     
     var nodes = [
         {"value": "AB&JS", "image": "AB&JS.jpg"},
-        {"value": "DP"},
-        {"value": "EV"},
-        {"value": "HoOL"},
-        {"value": "MA"},
-        {"value": "MH"},
-        {"value": "MMa"},
-        {"value": "MMe"},
-        {"value": "MPe"},
-        {"value": "MPu"},
-        {"value": "NtPB"},
-        {"value": "PFG"},
-        {"value": "PFD"},
-        {"value": "StAaA"}
+        {"value": "DP", "image": "DP.jpg"},
+        {"value": "EV", "image": "EV.jpg"},
+        {"value": "HoOL", "image": "HoOL.jpg"},
+        {"value": "MA", "image": "MA.jpg"},
+        {"value": "MH", "image": "MH.jpg"},
+        {"value": "MMa", "image": "MMa.jpg"},
+        {"value": "MMe", "image": "MMe.jpg"},
+        {"value": "MPe", "image": "MPe.jpg"},
+        {"value": "MPu", "image": "MPu.jpg"},
+        {"value": "NtPB", "image": "NtPB.jpg"},
+        {"value": "PFG", "image": "PFG.jpg"},
+        {"value": "PFD", "image": "PFD.jpg"},
+        {"value": "StAaA", "image": "StAaA.jpg"},
     ];
 
     var links = [
@@ -90,8 +96,20 @@
             .on("drag", dragged)
             .on("end", dragended));
 
+    var cardImage = d3.select("#cardImage");
     nodesel.append("circle")
-        .attr("r", 20);
+        .attr("r", 20)
+        .on("mouseover", function(d) {
+            d3.select(this).style("fill", "orange");
+            cardImage.style("opacity", 1)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY) + "px")
+                .html("<img src='" + d.image + "' style='width:200px;height:300px;'>");
+        })
+        .on("mouseout", function(d) {
+            d3.select(this).style("fill", "lightblue");
+            cardImage.style("opacity", 0);
+        });
     
     nodesel.append("text")
         .attr("transform", "translate(0,6)")
