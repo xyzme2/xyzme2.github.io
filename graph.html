@@ -12,34 +12,66 @@
 <script>
     const svg = d3.select("body")
     .append("svg")
-    .attr("width", 500)
+    .attr("width", 1000)
     .attr("height", 500);
     var width = svg.attr("width");
     var height = svg.attr("height");
     
     var nodes = [
-        {"value": 4},
-        {"value": 8},
-        {"value": 15},
-        {"value": 16},
-        {"value": 23},
-        {"value": 42}
+        {"value": "AB&JS", "image": "AB&JS.jpg"},
+        {"value": "DP"},
+        {"value": "EV"},
+        {"value": "HoOL"},
+        {"value": "MA"},
+        {"value": "MH"},
+        {"value": "MMa"},
+        {"value": "MMe"},
+        {"value": "MPe"},
+        {"value": "MPu"},
+        {"value": "NtPB"},
+        {"value": "PFG"},
+        {"value": "PFD"},
+        {"value": "StAaA"}
     ];
 
     var links = [
-        {"source": 8, "target": 4},
-        {"source": 16, "target": 4},
-        {"source": 16, "target": 8},
-        {"source": 23, "target": 8},
-        {"source": 23, "target": 15},
-        {"source": 42, "target": 4},
-        {"source": 42, "target": 15},
-        {"source": 42, "target": 23}
+        {"source": "AB&JS", "target": "EV"},
+        {"source": "AB&JS", "target": "MH"},
+        {"source": "DP", "target": "EV"},
+        {"source": "DP", "target": "MA"},
+        {"source": "DP", "target": "MH"},
+        {"source": "DP", "target": "MMa"},
+        {"source": "DP", "target": "MMe"},
+        {"source": "DP", "target": "MPe"},
+        {"source": "DP", "target": "MPu"},
+        {"source": "DP", "target": "PFG"},
+        {"source": "DP", "target": "PFD"},
+        {"source": "EV", "target": "HoOL"},
+        {"source": "EV", "target": "MMa"},
+        {"source": "EV", "target": "NtPB"},
+        {"source": "EV", "target": "StAaA"},
+        {"source": "HoOL", "target": "MA"},
+        {"source": "HoOL", "target": "MPe"},
+        {"source": "HoOL", "target": "MPu"},
+        {"source": "HoOL", "target": "NtPB"},
+        {"source": "HoOL", "target": "PFG"},
+        {"source": "HoOL", "target": "PFD"},
+        {"source": "HoOL", "target": "StAaA"},
+        {"source": "MA", "target": "MH"},
+        {"source": "MA", "target": "PFG"},
+        {"source": "MH", "target": "MMa"},
+        {"source": "MH", "target": "MMe"},
+        {"source": "MH", "target": "MPe"},
+        {"source": "MH", "target": "MPu"},
+        {"source": "MMa", "target": "MPu"},
+        {"source": "NtPB", "target": "PFG"},
+        {"source": "NtPB", "target": "PFD"},
+        {"source": "NtPB", "target": "StAaA"},
     ];
     
     var simulation = d3.forceSimulation(nodes)
-        .force("link", d3.forceLink(links).distance(75).id(d => d.value))
-        .force("charge", d3.forceManyBody().strength(-100))
+        .force("link", d3.forceLink(links).distance(150).id(d => d.value))
+        .force("charge", d3.forceManyBody().strength(-500))
         .force("center", d3.forceCenter(width / 2, height / 2))
         .on("tick", ticked);
     
