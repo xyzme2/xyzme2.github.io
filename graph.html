@@ -130,7 +130,6 @@
         .on("mouseover", function(d) {
             var targets = d.targets;
             for (let i = 0; i < targets.length; i++) {
-                d3.select("body").append("p").text(d.targets[i]); 
                 d3.selectAll(".node").filter(function(d) {
                     return d.value == targets[i];
                 }).select("circle").style("fill", "orange");
@@ -146,7 +145,6 @@
             d3.select(this).style("fill", "lightblue");
             var targets = d.targets;
             for (let i = 0; i < targets.length; i++) {
-                d3.select("body").append("p").text(d.targets[i]); 
                 d3.selectAll(".node").filter(function(d) {
                     return d.value == targets[i];
                 }).select("circle").style("fill", "lightblue");
