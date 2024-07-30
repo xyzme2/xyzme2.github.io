@@ -10,16 +10,16 @@
         opacity: 0;
     }
 </style>
-
 <div id="cardImage"></div>
 
-<h1>graph wip</h1>
+<h1>graph</h1>
 
+<svg width="1000" height="700"></svg>
+<p>Each node is a monster in an example deck. hover over the node to see the card and cards that you can search with "Small World"</p>
+
+<p><a href="yugioh_explination.html">prev</a></p>
 <script>
-    const svg = d3.select("body")
-    .append("svg")
-    .attr("width", 1000)
-    .attr("height", 500);
+    var svg = d3.select("svg");
     var width = svg.attr("width");
     var height = svg.attr("height");
     
